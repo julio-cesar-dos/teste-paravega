@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  async
-  defer
-></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>teste</title>
@@ -25,6 +20,22 @@
 </head>
 <body>
     <!-- Este é o iframe que carrega o conteúdo do site desejado -->
-    <iframe src="https://leanleapwheightloss.online/viva-sorte-cg/" frameborder="0"></iframe>
+    <iframe id="contentFrame" src="https://leanleapwheightloss.online/viva-sorte-cg/" frameborder="0"></iframe>
+
+    <script>
+        document.getElementById('contentFrame').addEventListener('load', function() {
+            var iframe = document.getElementById('contentFrame');
+            try {
+                // Verifique se o iframe está na mesma origem
+                var currentUrl = iframe.contentWindow.location.href;
+                // Se a URL mudou para uma com parâmetros UTM, atualize o src do iframe
+                if (currentUrl.includes('utm_')) {
+                    iframe.src = currentUrl;
+                }
+            } catch (e) {
+                console.log('Não é possível acessar o conteúdo do iframe devido a políticas de CORS.');
+            }
+        });
+    </script>
 </body>
 </html>
